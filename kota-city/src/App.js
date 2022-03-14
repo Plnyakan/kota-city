@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Checkout from './components/Checkout';
 import Profile from './components/Profile';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route path="/">
             <Header />

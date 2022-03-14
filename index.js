@@ -16,6 +16,10 @@ app.use(cors())
 
 app.use("/auth",require("./routes/jwtAuth"));
 
+
+//home routes
+app.use("/home", require("./routes/home"))
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
 })
