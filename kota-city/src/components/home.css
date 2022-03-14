@@ -1,0 +1,48 @@
+
+/* .slide-container {
+  align-items: center;
+  justify-content: center;
+} */
+
+.slide-container > img {
+    height:200px;
+    width:100%;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+    margin-bottom: -80px;
+
+}
+
+.cart {
+  background-color: #f0c14b;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: #a88734 #9c7e31 #846a29; 
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.slide_price {
+  color: red;
+}
+
+.each-slide {
+  margin-left: 390px;
+}
+
+.each-slide > div {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 320px;
+    width: 450px;
+  }
+  
+  .each-slide span {
+    padding: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    text-align: center;
+  }
