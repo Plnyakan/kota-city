@@ -7,7 +7,6 @@ import cheesetomato from '../assest/Cheesetomato.webp';
 import baconchips from '../assest/Baconchips.webp';
 import fullydagwood from '../assest/FullyDagwood.webp';
 import topimage from '../assest/topimage.webp';
-//import styled from 'styled-components';
 
 const slideImages = [
   {

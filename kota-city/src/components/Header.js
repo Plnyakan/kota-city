@@ -1,11 +1,46 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Home from './Home';
 
-function Header() {
+function Header({ setAuth }) {
+    const [name, setName] = useState("");
+
+    // const getName = async () => {
+    //   try {
+    //     const res = await fetch("http://localhost:5000/home/", {
+    //       method: "POST",
+    //       headers: { token: localStorage.token }
+    //     });
+  
+    //     const parseRes = await res.json();
+    //     console.log(parseRes);
+    //     setName(parseRes.name);
+    //   } catch (err) {
+    //     console.error(err.message);
+    //   }
+    // };
+
+    const logout = async e => {
+        e.preventDefault();
+        try {
+          localStorage.removeItem("token");
+          setAuth(false);
+          toast.success("Logout successfully");
+        } catch (err) {
+          console.error(err.message);
+        }
+      };
+
+    // useEffect(() => {
+    //     getName();
+    //   }, []);
+
   return (
+      <>
       <Navbar>
 
           {/* logo  image png*/}
@@ -27,7 +62,7 @@ function Header() {
         <Headernav>
             <Links to="login">
                 <HeaderOptions>
-                    <HeaderOne>Sign-In</HeaderOne>
+                    <HeaderOne onClick={e => logout(e)}>Sign-Out</HeaderOne>
                 </HeaderOptions>
           </Links>
           <Links to="/">
@@ -40,12 +75,6 @@ function Header() {
                     <HeaderOne>Orders</HeaderOne>
                 </HeaderOptions>
           </Links>
-          <Links to="/profile">
-            <HeaderOptions>
-                <HeaderOne>My Profile</HeaderOne>
-            </HeaderOptions> 
-          </Links>
-          
         </Headernav>
 
           {/* shopping busket */}
@@ -58,6 +87,7 @@ function Header() {
 
         
       </Navbar>
+      </>
   )
 }
 

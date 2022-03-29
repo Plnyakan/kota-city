@@ -1,23 +1,90 @@
-import React from 'react'
+import React , {useState} from 'react'
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-function Register() {
+function Register({setAuth}) {
+
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    name: ""
+  })
+
+  const {email,password,name} = inputs;
+
+  const onChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });} 
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+
+    try {
+
+      const body = {name, email, password};
+      
+      const response = await fetch(
+        "http://localhost:5000/auth/register",{
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        const parseRes = await response.json()
+        // console.log(parseRes)
+        // setAuth(true);
+
+        if (parseRes.token) {
+          localStorage.setItem('token', parseRes.token);
+          setAuth(true);
+          toast.success("Register Successfully");
+        } else {
+          setAuth(false);
+          toast.error(parseRes);
+        }
+
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
   return (
     <Container>
       <RegisterContainer>
           <Header>Sign Up</Header>
-          <form>
+          <form onSubmit={onSubmitForm}>
               <Header5>Username</Header5>
-              <RegisterInput  type='text'/>
+              <RegisterInput 
+              name="name" 
+              type='text' 
+              placeholder='Username'
+              onChange={e => onChange(e)}
+              value={name} 
+              />
+
               <Header5>E-mail</Header5>
-              <RegisterInput  type='email'/>
+              <RegisterInput  
+              name="email"
+              type='email' 
+              placeholder='Email'
+              onChange={e => onChange(e)}
+              value={email}
+              />
+
               <Header5>Password</Header5>
-              <RegisterInput  type='password'/>
+              <RegisterInput  
+              name="password"
+              type='password'
+              placeholder='Password' 
+              onChange={e => onChange(e)}
+              value={password}
+              />
               <RegisterButton  type='submit'>Sign Up</RegisterButton>
           </form>
           <RegisterPar>By continuing, you agree to Kota-City's Conditions of Use and Privacy Notice.
           </RegisterPar>
+          <Link to='/login'>
           <LoginButton>Sign-in to your Kota-City Account</LoginButton>
+          </Link>
       </RegisterContainer>
     </Container>
   )
